@@ -1,0 +1,45 @@
+.resa-form {
+  margin-bottom: 20px;
+}
+
+.resa-badge {
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #ffffff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resa-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.resa-nom {
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.resa-dates {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.resa-note {
+  font-size: 13px;
+  color: #9ca3af;
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
