@@ -1,3 +1,46 @@
+/* ── Card ── */
+
+.adm-card {
+  background: #ffffff;
+  border: 1px solid rgba(201,169,110,0.12);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(44,24,16,0.04);
+  padding: 28px;
+}
+
+.adm-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.adm-card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c1810;
+}
+
+.adm-btn-ghost {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  background: transparent;
+  color: #b8a898;
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.adm-btn-ghost:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+  background: rgba(239,68,68,0.04);
+}
+
 /* ── Calendar wrapper ── */
 
 .cal-wrapper {
@@ -11,39 +54,48 @@
 .cal-wrapper .react-calendar {
   width: 100%;
   max-width: 100%;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-family: var(--sans);
-  background: var(--bg-card);
-  padding: 12px;
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 12px;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #ffffff;
+  padding: 16px;
 }
 
 .cal-wrapper .react-calendar__navigation {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .cal-wrapper .react-calendar__navigation button {
-  font-family: var(--sans);
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 15px;
   font-weight: 600;
-  color: var(--text-h);
+  color: #2c1810;
   background: none;
   border: none;
-  border-radius: 6px;
-  padding: 8px;
+  border-radius: 8px;
+  padding: 10px;
   cursor: pointer;
   min-width: 36px;
+  transition: background 0.15s;
+}
+
+.cal-wrapper .react-calendar__navigation__label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2c1810;
 }
 
 .cal-wrapper .react-calendar__navigation button:hover {
-  background: #f3f4f6;
+  background: rgba(201,169,110,0.1);
 }
 
 .cal-wrapper .react-calendar__month-view__weekdays {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--text);
+  letter-spacing: 0.08em;
+  color: #8a7060;
 }
 
 .cal-wrapper .react-calendar__month-view__weekdays abbr {
@@ -51,59 +103,60 @@
 }
 
 .cal-wrapper .react-calendar__tile {
-  font-family: var(--sans);
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 14px;
   padding: 10px 4px;
-  border-radius: 6px;
-  color: var(--text-h);
+  border-radius: 8px;
+  color: #2c1810;
   position: relative;
+  transition: background 0.15s;
 }
 
 .cal-wrapper .react-calendar__tile:hover {
-  background: #f3f4f6;
+  background: rgba(201,169,110,0.08);
 }
 
 .cal-wrapper .react-calendar__tile--now {
-  background: #f0ebe3;
+  background: #fdf6ec;
   font-weight: 700;
 }
 
 .cal-wrapper .react-calendar__tile--active {
-  background: var(--accent) !important;
+  background: #c9a96e !important;
   color: #ffffff !important;
 }
 
 /* ── Reserved tiles ── */
 
 .cal-wrapper .cal-reserve {
-  background: rgba(200, 50, 50, 0.15);
-  color: #1a1613;
+  background: rgba(201,169,110,0.2);
+  color: #2c1810;
   font-weight: 600;
 }
 
 .cal-wrapper .cal-reserve:hover {
-  background: rgba(200, 50, 50, 0.28);
+  background: rgba(201,169,110,0.35);
 }
 
 .cal-wrapper .cal-debut {
-  border-radius: 6px 0 0 6px;
+  border-radius: 8px 0 0 8px;
 }
 
 .cal-wrapper .cal-fin {
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
 }
 
 .cal-wrapper .cal-debut.cal-fin {
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 /* ── Detail panel ── */
 
 .cal-detail {
-  background: #faf8f5;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 20px;
+  background: #fdf6ec;
+  border: 1px solid rgba(201,169,110,0.25);
+  border-radius: 12px;
+  padding: 18px 22px;
   margin-bottom: 20px;
 }
 
@@ -115,24 +168,26 @@
 }
 
 .cal-detail-nom {
-  font-size: 16px;
-  color: var(--text-h);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2c1810;
 }
 
 .cal-detail-libre {
   font-size: 14px;
-  color: var(--text);
+  color: #8a7a6a;
 }
 
 .cal-detail-dates {
   font-size: 14px;
-  color: var(--text);
+  color: #8a7a6a;
   margin-top: 8px;
 }
 
 .cal-detail-note {
   font-size: 13px;
-  color: #9ca3af;
+  color: #b8a898;
   margin-top: 6px;
   font-style: italic;
 }
@@ -150,7 +205,7 @@
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  color: var(--text);
+  color: #8a7a6a;
 }
 
 .cal-legende-dot {
@@ -160,10 +215,10 @@
 }
 
 .cal-legende-reserve {
-  background: rgba(200, 50, 50, 0.3);
+  background: #c9a96e;
 }
 
 .cal-legende-libre {
-  background: #ffffff;
-  border: 1px solid var(--border);
+  background: #fdf6ec;
+  border: 1px solid rgba(201,169,110,0.4);
 }

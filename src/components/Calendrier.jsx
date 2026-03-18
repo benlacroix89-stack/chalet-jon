@@ -55,9 +55,9 @@ function Calendrier() {
   }
 
   return (
-    <div className="card">
-      <div className="card-header">
-        <h2>Calendrier</h2>
+    <div className="adm-card">
+      <div className="adm-card-header">
+        <h2 className="adm-card-title">Calendrier</h2>
       </div>
 
       <div className="cal-wrapper">
@@ -77,7 +77,7 @@ function Calendrier() {
             <>
               <div className="cal-detail-header">
                 <strong className="cal-detail-nom">{resaSelectionnee.nom}</strong>
-                <button className="btn btn-ghost" onClick={fermer}>Fermer</button>
+                <button className="adm-btn-ghost" onClick={fermer}>Fermer</button>
               </div>
               <div className="cal-detail-dates">
                 {formaterDate(resaSelectionnee.arrivee)} &rarr; {formaterDate(resaSelectionnee.depart)}
@@ -89,7 +89,7 @@ function Calendrier() {
           ) : (
             <div className="cal-detail-header">
               <span className="cal-detail-libre">Aucune reservation pour le {dateSelectionnee.toLocaleDateString('fr-CA')}</span>
-              <button className="btn btn-ghost" onClick={fermer}>Fermer</button>
+              <button className="adm-btn-ghost" onClick={fermer}>Fermer</button>
             </div>
           )}
         </div>
