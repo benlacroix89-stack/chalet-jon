@@ -55,7 +55,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=1920&q=80') center / cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=1920&q=80') center / cover no-repeat;
   overflow: hidden;
 }
 
@@ -202,7 +202,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  max-width: 600px;
+  max-width: 700px;
   margin: 32px auto 0;
 }
 
@@ -224,12 +224,44 @@
 .pub-equip-icon {
   font-size: 24px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
 }
 
 .pub-equip-label {
   font-size: 14px;
   font-weight: 500;
   color: #3d3530;
+}
+
+/* ── Sous-titres saison ── */
+
+.pub-saison-row {
+  display: flex;
+  gap: 40px;
+  margin-top: 32px;
+}
+
+.pub-saison-col {
+  flex: 1;
+}
+
+.pub-saison {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 16px;
+}
+
+.pub-saison--ete {
+  color: #b8863a;
+}
+
+.pub-saison--hiver {
+  color: #4a90d9;
 }
 
 /* ── Tarifs ── */
@@ -421,10 +453,57 @@
   font-size: 15px;
 }
 
+/* ── Infos pratiques ── */
+
+.pub-infos {
+  background: #faf8f5;
+}
+
+.pub-infos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 700px;
+  margin: 32px auto 0;
+}
+
+.pub-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e8e2da;
+}
+
+.pub-info-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.pub-info-item strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1613;
+  margin-bottom: 4px;
+}
+
+.pub-info-item p {
+  font-size: 13px;
+  color: #6b6058;
+  margin: 0;
+}
+
 /* ── Localisation ── */
 
 .pub-loc {
-  background: #faf8f5;
+  background: #ffffff;
+}
+
+.pub-map {
+  margin-top: 28px;
 }
 
 /* ── Footer ── */
@@ -473,6 +552,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .pub-infos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .pub-tarifs-grid {
     grid-template-columns: 1fr;
     max-width: 320px;
@@ -493,6 +576,10 @@
   }
 
   .pub-equip-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pub-infos-grid {
     grid-template-columns: 1fr;
   }
 

@@ -1,31 +1,55 @@
 import { useState, useEffect, useRef } from 'react'
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { Sailboat, Waves, Fish, Mountain, Truck, Snowflake, Anchor, Footprints, Wind } from 'lucide-react'
 import app from '../firebase'
 import './PagePublique.css'
 
 const db = getFirestore(app)
 const demandesRef = collection(db, 'demandes')
 
+const svg = { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: '#3d3530', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' }
+
 const EQUIPEMENTS = [
-  { icon: '📶', label: 'Wifi haute vitesse' },
-  { icon: '🛁', label: 'Spa / Bain tourbillon' },
-  { icon: '🔥', label: 'Foyer interieur' },
-  { icon: '🛶', label: 'Kayaks inclus' },
-  { icon: '🍖', label: 'BBQ exterieur' },
-  { icon: '🅿️', label: 'Stationnement gratuit' },
+  { icon: <svg {...svg}><path d="M12 20h.01" /><path d="M2 8.82a15 15 0 0 1 20 0" /><path d="M5 12.86a10 10 0 0 1 14 0" /><path d="M8.5 16.9a5 5 0 0 1 7 0" /></svg>, label: 'Internet' },
+  { icon: <svg {...svg}><path d="M12 2c1 3-2 6-2 9a4 4 0 0 0 8 0c0-3-2-5-3-7" /><path d="M12 15a2 2 0 0 0 2-2c0-1.5-2-3-2-3s-2 1.5-2 3a2 2 0 0 0 2 2z" /></svg>, label: 'Poele a bois' },
+  { icon: <svg {...svg}><path d="M4 10h16" /><path d="M4 10c0 3 2 5 4 6l-1 6" /><path d="M20 10c0 3-2 5-4 6l1 6" /><path d="M8 6V4" /><path d="M12 6V2" /><path d="M16 6V4" /></svg>, label: 'BBQ' },
+  { icon: <svg {...svg}><path d="M2 21c.6-.5 1.2-1 2.5-1 2.5 0 2.5 1 5 1s2.5-1 5-1 2.5 1 5 1c1.3 0 1.9-.5 2.5-1" /><path d="M4 16l6-10 6 10" /><line x1="12" y1="6" x2="12" y2="16" /></svg>, label: 'Canot' },
+  { icon: <svg {...svg}><circle cx="8" cy="14" r="3" /><circle cx="16" cy="14" r="3" /><path d="M8 11V6l4 3 4-3v5" /><path d="M2 21c.6-.5 1.2-1 2.5-1 2.5 0 2.5 1 5 1s2.5-1 5-1 2.5 1 5 1c1.3 0 1.9-.5 2.5-1" /></svg>, label: 'Pedalo' },
+  { icon: <svg {...svg}><rect x="3" y="6" width="18" height="4" rx="1" /><path d="M5 10v8" /><path d="M19 10v8" /><path d="M2 21c.6-.5 1.2-1 2.5-1 2.5 0 2.5 1 5 1s2.5-1 5-1 2.5 1 5 1c1.3 0 1.9-.5 2.5-1" /></svg>, label: 'Quai 45 pieds' },
+  { icon: <svg {...svg}><path d="M3 21h18" /><path d="M5 21V10" /><path d="M19 21V10" /><path d="M12 3l9 7H3l9-7z" /><path d="M9 21v-5h6v5" /></svg>, label: 'Gazebo' },
+  { icon: <svg {...svg}><path d="M12 2c1 3-2 6-2 9a4 4 0 0 0 8 0c0-3-2-5-3-7" /><path d="M2 21h20" /><path d="M5 21l2-6h10l2 6" /></svg>, label: 'Foyer exterieur' },
+  { icon: <svg {...svg}><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 10h20" /><path d="M8 10v10" /><path d="M16 10v10" /></svg>, label: 'Veranda' },
+  { icon: <svg {...svg}><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8" /><path d="M12 17v4" /></svg>, label: 'Television / Satellite' },
+]
+
+const lucideProps = { size: 20, color: '#1a1613', strokeWidth: 1.6 }
+
+const ACTIVITES_ETE = [
+  { icon: <Sailboat {...lucideProps} />, label: 'Canot' },
+  { icon: <Waves {...lucideProps} />, label: 'Kayak' },
+  { icon: <Fish {...lucideProps} />, label: 'Peche' },
+  { icon: <Mountain {...lucideProps} />, label: 'Randonnee' },
+  { icon: <Truck {...lucideProps} />, label: 'Quad' },
+]
+
+const ACTIVITES_HIVER = [
+  { icon: <Snowflake {...lucideProps} />, label: 'Motoneige' },
+  { icon: <Anchor {...lucideProps} />, label: 'Peche glace' },
+  { icon: <Footprints {...lucideProps} />, label: 'Raquette' },
+  { icon: <Wind {...lucideProps} />, label: 'Ski fond' },
 ]
 
 const TARIFS = [
-  { label: 'Semaine', prix: '250', unite: '/ nuit', desc: 'Dimanche au jeudi' },
-  { label: 'Weekend', prix: '350', unite: '/ nuit', desc: 'Vendredi et samedi', vedette: true },
-  { label: 'Semaine complete', prix: '2 000', unite: '/ 7 nuits', desc: 'Meilleure valeur' },
+  { label: 'Fin de semaine', prix: '450', unite: '/ 2 nuits', desc: 'Vendredi au dimanche', vedette: true },
+  { label: 'Semaine', prix: '850', unite: '/ 7 nuits', desc: 'Meilleure valeur' },
+  { label: 'Mois', prix: '2 500', unite: '/ mois', desc: 'Sejour prolonge' },
 ]
 
 const DETAILS = [
-  { valeur: '4', label: 'Chambres' },
-  { valeur: '10', label: 'Personnes' },
+  { valeur: '7', label: 'Personnes' },
+  { valeur: '3', label: 'Chambres' },
   { valeur: '4', label: 'Saisons' },
-  { valeur: '1', label: 'Lac prive' },
+  { valeur: '3', label: 'Etoiles CITQ' },
 ]
 
 function useReveal() {
@@ -85,9 +109,9 @@ function PagePublique({ onAdmin }) {
       <section className="pub-hero">
         <div className="pub-hero-overlay" />
         <div className="pub-hero-content">
-          <p className="pub-hero-tag">Laurentides, Quebec</p>
-          <h1 className="pub-hero-title">Chalet des Laurentides</h1>
-          <p className="pub-hero-sub">Un refuge d'exception au bord du lac, pour des moments inoubliables en famille ou entre amis.</p>
+          <p className="pub-hero-tag">Notre-Dame-de-Pontmain, Laurentides</p>
+          <h1 className="pub-hero-title">Le Camp du Lac</h1>
+          <p className="pub-hero-sub">Chalet 4 saisons sur le lac du Camp — tranquillite, nature et toutes commodites au coeur des Laurentides.</p>
           <div className="pub-hero-actions">
             <button className="pub-btn pub-btn-hero" onClick={scrollToForm}>Reserver maintenant</button>
             <button className="pub-btn pub-btn-outline" onClick={onAdmin}>Espace admin</button>
@@ -115,7 +139,7 @@ function PagePublique({ onAdmin }) {
           <div className="pub-container">
             <h2 className="pub-heading">Votre escapade nature</h2>
             <p className="pub-text">
-              Niché au coeur des Laurentides, notre chalet de 4 chambres vous accueille toute l'année au bord d'un lac privé. Profitez d'un espace chaleureux pouvant accueillir jusqu'à 10 personnes, idéal pour les vacances en famille, les retraites entre amis ou les séjours romantiques. En été, le lac et les kayaks vous attendent. En hiver, le spa et le foyer créent l'ambiance parfaite.
+              Chalet 4 saisons sur le lac du Camp a Notre-Dame-de-Pontmain dans les Laurentides. Profitez de la tranquillite et de toutes les commodites avec acces a plus de 100 km de voie navigable. Sentiers de VTT et de motoneige a proximite. Accredite 3 etoiles CITQ. Capacite de 7 personnes dans 3 chambres confortables.
             </p>
           </div>
         </section>
@@ -138,11 +162,39 @@ function PagePublique({ onAdmin }) {
         </section>
       </Reveal>
 
+      {/* ── Activites ── */}
+      <Reveal>
+        <section className="pub-section pub-equip">
+          <div className="pub-container">
+            <h2 className="pub-heading">Activites</h2>
+            <h3 className="pub-saison pub-saison--ete">Ete</h3>
+            <div className="pub-equip-grid">
+              {ACTIVITES_ETE.map((a) => (
+                <div key={a.label} className="pub-equip-item">
+                  <span className="pub-equip-icon">{a.icon}</span>
+                  <span className="pub-equip-label">{a.label}</span>
+                </div>
+              ))}
+            </div>
+            <h3 className="pub-saison pub-saison--hiver">Hiver</h3>
+            <div className="pub-equip-grid">
+              {ACTIVITES_HIVER.map((a) => (
+                <div key={a.label} className="pub-equip-item">
+                  <span className="pub-equip-icon">{a.icon}</span>
+                  <span className="pub-equip-label">{a.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
       {/* ── Tarifs ── */}
       <Reveal>
         <section className="pub-section pub-tarifs">
           <div className="pub-container">
             <h2 className="pub-heading">Tarifs</h2>
+            <p className="pub-text" style={{ marginBottom: 32 }}>Duree minimum de 2 nuits</p>
             <div className="pub-tarifs-grid">
               {TARIFS.map((t) => (
                 <div key={t.label} className={`pub-tarif${t.vedette ? ' vedette' : ''}`}>
@@ -156,6 +208,45 @@ function PagePublique({ onAdmin }) {
                   <span className="pub-tarif-desc">{t.desc}</span>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
+      {/* ── Infos pratiques ── */}
+      <Reveal>
+        <section className="pub-section pub-infos">
+          <div className="pub-container">
+            <h2 className="pub-heading">Infos pratiques</h2>
+            <div className="pub-infos-grid">
+              <div className="pub-info-item">
+                <span className="pub-info-icon">🕓</span>
+                <div>
+                  <strong>Arrivee</strong>
+                  <p>Apres 16h</p>
+                </div>
+              </div>
+              <div className="pub-info-item">
+                <span className="pub-info-icon">🕛</span>
+                <div>
+                  <strong>Depart</strong>
+                  <p>Avant 12h</p>
+                </div>
+              </div>
+              <div className="pub-info-item">
+                <span className="pub-info-icon">💰</span>
+                <div>
+                  <strong>Depot</strong>
+                  <p>300 $ requis</p>
+                </div>
+              </div>
+              <div className="pub-info-item">
+                <span className="pub-info-icon">🐾</span>
+                <div>
+                  <strong>Animaux</strong>
+                  <p>Permis avec restrictions</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -195,7 +286,7 @@ function PagePublique({ onAdmin }) {
                   </label>
                   <label className="pub-label">
                     Nombre de personnes
-                    <input className="pub-input" type="number" min="1" max="10" value={form.personnes} onChange={update('personnes')} required />
+                    <input className="pub-input" type="number" min="1" max="7" value={form.personnes} onChange={update('personnes')} required />
                   </label>
                 </div>
                 <div className="pub-form-row">
@@ -226,14 +317,26 @@ function PagePublique({ onAdmin }) {
         <section className="pub-section pub-loc">
           <div className="pub-container">
             <h2 className="pub-heading">Localisation</h2>
-            <p className="pub-text">Region des Laurentides, Quebec — a seulement 1h30 de Montreal. Acces facile par l'autoroute 15 Nord.</p>
+            <p className="pub-text">Notre-Dame-de-Pontmain, Laurentides, Quebec<br />GPS : 46.318, -75.623</p>
+            <div className="pub-map">
+              <iframe
+                title="Localisation du Camp du Lac"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d20000!2d-75.623!3d46.318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sca"
+                width="100%"
+                height="350"
+                style={{ border: 0, borderRadius: 12 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </section>
       </Reveal>
 
       {/* ── Footer ── */}
       <footer className="pub-footer">
-        <p>Chalet des Laurentides — Tous droits reserves</p>
+        <p>Le Camp du Lac — Notre-Dame-de-Pontmain, Laurentides — Tous droits reserves</p>
       </footer>
     </div>
   )
