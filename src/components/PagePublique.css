@@ -394,6 +394,192 @@
   margin: 0;
 }
 
+/* ── Disponibilites ── */
+.pub-dispo {
+  background: var(--dark);
+  background-image: linear-gradient(135deg, rgba(44,24,16,1) 0%, rgba(60,35,22,1) 100%);
+}
+
+.pub-dispo-cal {
+  max-width: 700px;
+  margin: 32px auto 0;
+}
+
+.pub-dispo-cal .react-calendar {
+  width: 100%;
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 14px;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: rgba(255,255,255,0.04);
+  padding: 16px;
+  color: rgba(255,255,255,0.8);
+}
+
+.pub-dispo-cal .react-calendar__navigation {
+  margin-bottom: 10px;
+}
+
+.pub-dispo-cal .react-calendar__navigation button {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  min-width: 32px;
+}
+
+.pub-dispo-cal .react-calendar__navigation__label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.pub-dispo-cal .react-calendar__navigation button:hover {
+  background: rgba(201,169,110,0.12);
+}
+
+.pub-dispo .react-calendar__navigation {
+  background: transparent;
+}
+
+.pub-dispo .react-calendar__navigation button {
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.pub-dispo .react-calendar__navigation button:hover {
+  background: rgba(201,169,110,0.15);
+  color: #c9a96e;
+}
+
+.pub-dispo .react-calendar__navigation__label {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+.pub-dispo-cal .react-calendar__month-view__weekdays {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.35);
+}
+
+.pub-dispo-cal .react-calendar__month-view__weekdays abbr {
+  text-decoration: none;
+}
+
+.pub-dispo-cal .react-calendar__tile {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  padding: 10px 4px;
+  border-radius: 6px;
+  color: rgba(255,255,255,0.7);
+  cursor: default;
+}
+
+.pub-dispo-cal .react-calendar__tile:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.pub-dispo-cal .react-calendar__tile--now {
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.pub-dispo-cal .react-calendar__tile--active {
+  background: transparent !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+
+.pub-dispo-cal .react-calendar__month-view__days__day--neighboringMonth {
+  color: rgba(255,255,255,0.15);
+}
+
+.pub-dispo .react-calendar__tile:hover {
+  background: rgba(201,169,110,0.12) !important;
+  color: rgba(255,255,255,0.9) !important;
+}
+
+.pub-dispo .react-calendar__tile:enabled:hover {
+  background: rgba(201,169,110,0.12) !important;
+  color: rgba(255,255,255,0.9) !important;
+}
+
+.pub-dispo .react-calendar__tile--active:hover,
+.pub-dispo .react-calendar__tile--active {
+  background: transparent !important;
+  color: rgba(255,255,255,0.7) !important;
+  cursor: default !important;
+}
+
+.pub-dispo .react-calendar__tile:disabled {
+  background: transparent;
+}
+
+/* Reserved days */
+.pub-dispo-cal .pub-dispo-reserve {
+  background: rgba(239,68,68,0.25) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.pub-dispo-cal .pub-dispo-reserve:hover {
+  background: rgba(239,68,68,0.35) !important;
+}
+
+/* Double view gap */
+.pub-dispo-cal .react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.pub-dispo-cal .react-calendar--doubleView .react-calendar__viewContainer > div {
+  flex: 1;
+}
+
+/* Legende */
+.pub-dispo-legende {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.pub-dispo-leg-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+}
+
+.pub-dispo-leg-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.pub-dispo-leg-reserve {
+  background: rgba(239,68,68,0.35);
+}
+
+.pub-dispo-leg-libre {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,169,110,0.3);
+}
+
 /* ── Form section ── */
 .pub-form-section {
   background: var(--dark);
@@ -537,6 +723,7 @@
   .pub-act-row { grid-template-columns: 1fr; gap: 32px; }
   .pub-tarifs-grid { grid-template-columns: 1fr; max-width: 320px; }
   .pub-infos-grid { grid-template-columns: repeat(2, 1fr); }
+  .pub-dispo-cal .react-calendar--doubleView .react-calendar__viewContainer { flex-direction: column; }
   .pub-form-row { flex-direction: column; }
   .pub-newsletter-form { flex-direction: column; }
 }

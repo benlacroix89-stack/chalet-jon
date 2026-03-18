@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
-import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy } from 'firebase/firestore'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css'
 import { Sailboat, Waves, Fish, Mountain, Truck, Snowflake, Anchor, Footprints, Wind, Wifi, Flame, UtensilsCrossed, Ship, Bike, Anchor as AnchorIcon, TreePine, Tv, Home, Clock, DollarSign, PawPrint } from 'lucide-react'
 import app from '../firebase'
 import './PagePublique.css'
 
 const db = getFirestore(app)
 const demandesRef = collection(db, 'demandes')
+const reservationsRef = collection(db, 'reservations')
 
 const iconDark = { size: 24, color: '#c9a96e', strokeWidth: 1.5 }
 const iconLight = { size: 22, color: '#fdf6ec', strokeWidth: 1.5 }
@@ -94,7 +97,26 @@ function PagePublique({ onAdmin }) {
   const [chargement, setChargement] = useState(false)
   const [adminEmail, setAdminEmail] = useState('')
   const [adminMsg, setAdminMsg] = useState('')
+  const [reservations, setReservations] = useState([])
   const formRef = useRef(null)
+
+  useEffect(() => {
+    const q = query(reservationsRef, orderBy('arrivee', 'asc'))
+    const unsub = onSnapshot(q, (snap) => {
+      setReservations(snap.docs.map((d) => ({ id: d.id, ...d.data() })))
+    })
+    return unsub
+  }, [])
+
+  const estReserve = (date) => {
+    const str = date.toLocaleDateString('en-CA')
+    return reservations.some((r) => str >= r.arrivee && str <= r.depart)
+  }
+
+  const dispoTileClass = ({ date, view }) => {
+    if (view !== 'month') return null
+    return estReserve(date) ? 'pub-dispo-reserve' : null
+  }
 
   const update = (champ) => (e) => setForm({ ...form, [champ]: e.target.value })
 
@@ -291,6 +313,38 @@ function PagePublique({ onAdmin }) {
                 <strong>Animaux</strong>
                 <p>Permis avec restrictions</p>
               </div>
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
+      {/* ── Disponibilites ── */}
+      <Reveal>
+        <section className="pub-section pub-dispo">
+          <div className="pub-container">
+            <span className="pub-eyebrow pub-eyebrow--light">Planifiez votre sejour</span>
+            <h2 className="pub-heading pub-heading--light">Disponibilites</h2>
+            <div className="pub-dispo-cal">
+              <Calendar
+                tileClassName={dispoTileClass}
+                locale="fr-CA"
+                minDetail="month"
+                prev2Label={null}
+                next2Label={null}
+                showDoubleView={true}
+                selectRange={false}
+                onClickDay={() => {}}
+              />
+            </div>
+            <div className="pub-dispo-legende">
+              <span className="pub-dispo-leg-item">
+                <span className="pub-dispo-leg-dot pub-dispo-leg-reserve" />
+                Reserve
+              </span>
+              <span className="pub-dispo-leg-item">
+                <span className="pub-dispo-leg-dot pub-dispo-leg-libre" />
+                Disponible
+              </span>
             </div>
           </div>
         </section>
