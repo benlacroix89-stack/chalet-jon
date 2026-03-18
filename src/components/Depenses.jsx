@@ -7,6 +7,12 @@ const db = getFirestore(app)
 const depensesRef = collection(db, 'depenses')
 
 const CATEGORIES = ['Entretien', 'Nourriture', 'Equipement', 'Autre']
+const CAT_COLORS = {
+  Entretien: '#c9a96e',
+  Nourriture: '#7aab6d',
+  Equipement: '#6b8fb5',
+  Autre: '#b87d7d',
+}
 
 function Depenses() {
   const [depenses, setDepenses] = useState([])
@@ -42,39 +48,65 @@ function Depenses() {
 
   const total = depenses.reduce((sum, d) => sum + (d.montant || 0), 0)
 
+  const parCategorie = CATEGORIES.map((cat) => ({
+    cat,
+    color: CAT_COLORS[cat],
+    total: depenses.filter((d) => d.categorie === cat).reduce((s, d) => s + (d.montant || 0), 0),
+  })).filter((c) => c.total > 0)
+
   return (
     <div className="card">
       <div className="card-header">
         <h2>Depenses</h2>
       </div>
 
+      {parCategorie.length > 0 && (
+        <div className="dep-pills">
+          {parCategorie.map((c) => (
+            <span key={c.cat} className="dep-pill" style={{ background: `${c.color}15`, color: c.color, borderColor: `${c.color}30` }}>
+              <span className="dep-pill-dot" style={{ background: c.color }} />
+              {c.cat} — {c.total.toFixed(2)} $
+            </span>
+          ))}
+        </div>
+      )}
+
       <form className="form-stack dep-form" onSubmit={ajouterDepense}>
-        <input
-          className="input"
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <div className="form-row">
+        <label className="form-label">
+          Description
           <input
             className="input"
-            type="number"
-            placeholder="Montant ($)"
-            min="0"
-            step="0.01"
-            value={montant}
-            onChange={(e) => setMontant(e.target.value)}
+            type="text"
+            placeholder="Description de la depense"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
-          <select className="select" value={categorie} onChange={(e) => setCategorie(e.target.value)}>
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
+        </label>
+        <div className="form-row">
+          <label className="form-label">
+            Montant
+            <input
+              className="input"
+              type="number"
+              placeholder="0.00 $"
+              min="0"
+              step="0.01"
+              value={montant}
+              onChange={(e) => setMontant(e.target.value)}
+              required
+            />
+          </label>
+          <label className="form-label">
+            Categorie
+            <select className="select" value={categorie} onChange={(e) => setCategorie(e.target.value)}>
+              {CATEGORIES.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          </label>
         </div>
-        <button className="btn btn-primary" type="submit">Ajouter</button>
+        <button className="btn btn-primary" type="submit">Ajouter la depense</button>
       </form>
 
       {depenses.length === 0 ? (
@@ -89,7 +121,9 @@ function Depenses() {
                     <strong className="dep-desc">{d.description}</strong>
                     <span className="dep-montant">{d.montant?.toFixed(2)} $</span>
                   </div>
-                  <span className="dep-cat">{d.categorie}</span>
+                  <span className="dep-cat" style={{ color: CAT_COLORS[d.categorie] || '#8a7a6a' }}>
+                    {d.categorie}
+                  </span>
                 </div>
                 <button className="btn btn-ghost" onClick={() => supprimerDepense(d.id)}>
                   Supprimer
@@ -98,7 +132,7 @@ function Depenses() {
             ))}
           </ul>
           <div className="dep-total">
-            <span>Total</span>
+            <span>Total des depenses</span>
             <strong>{total.toFixed(2)} $</strong>
           </div>
         </>

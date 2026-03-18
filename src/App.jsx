@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { CalendarDays, ClipboardList, ListChecks, Receipt, LogOut } from 'lucide-react'
 import app from './firebase'
 import PagePublique from './components/PagePublique'
 import Login from './components/Login'
@@ -12,10 +13,10 @@ import './App.css'
 const auth = getAuth(app)
 
 const PAGES = [
-  { id: 'reservations', label: 'Reservations' },
-  { id: 'calendrier', label: 'Calendrier' },
-  { id: 'taches', label: 'Taches' },
-  { id: 'depenses', label: 'Depenses' },
+  { id: 'reservations', label: 'Reservations', icon: <ClipboardList size={20} /> },
+  { id: 'calendrier', label: 'Calendrier', icon: <CalendarDays size={20} /> },
+  { id: 'taches', label: 'Taches', icon: <ListChecks size={20} /> },
+  { id: 'depenses', label: 'Depenses', icon: <Receipt size={20} /> },
 ]
 
 function App() {
@@ -58,28 +59,36 @@ function App() {
 
   return (
     <div className="app">
-      <header className="topbar">
-        <div className="topbar-inner">
-          <h1 className="logo">Chalet de Jon</h1>
-          <nav className="nav">
-            {PAGES.map((p) => (
-              <button
-                key={p.id}
-                className={`nav-link${page === p.id ? ' active' : ''}`}
-                onClick={() => setPage(p.id)}
-              >
-                {p.label}
-              </button>
-            ))}
-            <button className="nav-link nav-logout" onClick={deconnexion}>
-              Deconnexion
-            </button>
-          </nav>
+      <aside className="sidebar">
+        <div className="sidebar-top">
+          <h1 className="sidebar-logo">Le Camp<br />du Lac</h1>
+          <span className="sidebar-sub">Tableau de bord</span>
         </div>
-      </header>
+        <nav className="sidebar-nav">
+          {PAGES.map((p) => (
+            <button
+              key={p.id}
+              className={`sidebar-link${page === p.id ? ' active' : ''}`}
+              onClick={() => setPage(p.id)}
+            >
+              {p.icon}
+              <span>{p.label}</span>
+            </button>
+          ))}
+        </nav>
+        <div className="sidebar-bottom">
+          <button className="sidebar-link sidebar-logout" onClick={deconnexion}>
+            <LogOut size={20} />
+            <span>Deconnexion</span>
+          </button>
+        </div>
+      </aside>
 
       <main className="main">
-        <div className="container">
+        <div className="main-header">
+          <h2 className="main-title">{PAGES.find((p) => p.id === page)?.label}</h2>
+        </div>
+        <div className="main-content">
           {page === 'reservations' && <Reservations />}
           {page === 'calendrier' && <Calendrier />}
           {page === 'taches' && <Taches />}

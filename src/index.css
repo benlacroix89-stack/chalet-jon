@@ -1,19 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 :root {
-  --text: #6b7280;
-  --text-h: #111827;
-  --bg: #f9fafb;
+  --text: #8a7a6a;
+  --text-h: #2c1810;
+  --bg: #f7f0e6;
   --bg-card: #ffffff;
-  --border: #e5e7eb;
-  --accent: #111827;
-  --accent-hover: #374151;
+  --border: rgba(201,169,110,0.15);
+  --accent: #c9a96e;
+  --accent-hover: #b8963d;
   --danger: #ef4444;
   --danger-hover: #dc2626;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --radius: 10px;
+  --shadow-sm: 0 1px 2px rgba(44,24,16,0.04);
+  --shadow: 0 2px 8px rgba(44,24,16,0.05);
+  --shadow-md: 0 4px 16px rgba(44,24,16,0.06);
+  --radius: 12px;
   --sans: 'Inter', system-ui, -apple-system, sans-serif;
 
   font-family: var(--sans);
@@ -25,13 +23,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
+* { box-sizing: border-box; }
+body { margin: 0; }
 
 #root {
   min-height: 100svh;
@@ -40,18 +33,12 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: var(--sans);
+  font-family: 'Playfair Display', Georgia, serif;
   color: var(--text-h);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
-h2 {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-p {
-  margin: 0;
-}
+h2 { font-size: 20px; font-weight: 600; }
+p { margin: 0; }

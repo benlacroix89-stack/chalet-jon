@@ -35,15 +35,25 @@ function Taches() {
   }
 
   const faites = taches.filter((t) => t.fait).length
+  const pourcent = taches.length > 0 ? Math.round((faites / taches.length) * 100) : 0
 
   return (
     <div className="card">
       <div className="card-header">
         <h2>Taches</h2>
         {taches.length > 0 && (
-          <span className="tache-compteur">{faites}/{taches.length} completees</span>
+          <span className="tache-compteur">{faites}/{taches.length}</span>
         )}
       </div>
+
+      {taches.length > 0 && (
+        <div className="tache-progress-wrap">
+          <div className="tache-progress-bar">
+            <div className="tache-progress-fill" style={{ width: `${pourcent}%` }} />
+          </div>
+          <span className="tache-progress-pct">{pourcent}%</span>
+        </div>
+      )}
 
       <form className="form-row tache-form" onSubmit={ajouterTache}>
         <input
@@ -63,12 +73,13 @@ function Taches() {
           {taches.map((tache) => (
             <li key={tache.id} className={`list-item tache-item${tache.fait ? ' fait' : ''}`}>
               <label className="tache-label">
-                <input
-                  type="checkbox"
-                  className="tache-check"
-                  checked={tache.fait}
-                  onChange={() => basculerStatut(tache)}
-                />
+                <span className={`tache-checkbox${tache.fait ? ' checked' : ''}`} onClick={() => basculerStatut(tache)}>
+                  {tache.fait && (
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6l3 3 5-5" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </span>
                 <span className="tache-titre">{tache.titre}</span>
               </label>
               <button className="btn btn-ghost" onClick={() => supprimerTache(tache.id)}>

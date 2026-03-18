@@ -1,55 +1,88 @@
-.tache-form {
-  margin-bottom: 20px;
-}
+.tache-form { margin-bottom: 24px; }
+.tache-form .input { flex: 1; }
 
-.tache-form .input {
-  flex: 1;
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+.card-header { display: flex; align-items: center; justify-content: space-between; }
 
 .tache-compteur {
   font-size: 13px;
-  color: var(--text);
-  background: var(--bg);
-  padding: 4px 10px;
+  font-weight: 600;
+  color: #c9a96e;
+  background: rgba(201,169,110,0.1);
+  padding: 4px 12px;
   border-radius: 20px;
-  font-weight: 500;
 }
 
-.tache-item.fait {
-  opacity: 0.45;
+/* ── Progress bar ── */
+.tache-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.tache-item.fait .tache-titre {
-  text-decoration: line-through;
+.tache-progress-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(201,169,110,0.12);
+  border-radius: 4px;
+  overflow: hidden;
 }
+
+.tache-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #c9a96e, #dfc38e);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.tache-progress-pct {
+  font-size: 13px;
+  font-weight: 700;
+  color: #c9a96e;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ── Custom checkbox ── */
+.tache-item.fait { opacity: 0.5; }
+.tache-item.fait .tache-titre { text-decoration: line-through; color: #b8a898; }
 
 .tache-label {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
   flex: 1;
   min-width: 0;
 }
 
-.tache-check {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--accent);
-  cursor: pointer;
+.tache-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(201,169,110,0.35);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.tache-checkbox:hover {
+  border-color: #c9a96e;
+}
+
+.tache-checkbox.checked {
+  background: #c9a96e;
+  border-color: #c9a96e;
 }
 
 .tache-titre {
   font-size: 14px;
-  color: var(--text-h);
+  color: #2c1810;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.2s;
 }

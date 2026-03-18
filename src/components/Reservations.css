@@ -1,43 +1,60 @@
-.resa-form {
-  margin-bottom: 20px;
-}
+.resa-form { margin-bottom: 24px; }
 
 .resa-badge {
   font-size: 12px;
-  font-weight: 600;
-  background: var(--accent);
+  font-weight: 700;
+  background: #c9a96e;
   color: #ffffff;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.resa-nuits {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c9a96e;
+  background: rgba(201,169,110,0.1);
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-align: center;
+}
+
 .resa-info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   flex: 1;
   min-width: 0;
   text-align: left;
 }
 
-.resa-nom {
-  font-size: 14px;
-  color: var(--text-h);
-}
+.resa-nom { font-size: 15px; font-weight: 600; color: #2c1810; }
 
 .resa-dates {
   font-size: 13px;
-  color: var(--text);
+  color: #8a7a6a;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resa-nuits-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #c9a96e;
+  background: rgba(201,169,110,0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
 }
 
 .resa-note {
   font-size: 13px;
-  color: #9ca3af;
+  color: #b8a898;
   font-style: italic;
   overflow: hidden;
   text-overflow: ellipsis;
