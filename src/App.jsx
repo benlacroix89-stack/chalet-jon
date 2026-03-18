@@ -6,12 +6,14 @@ import Login from './components/Login'
 import Reservations from './components/Reservations'
 import Taches from './components/Taches'
 import Depenses from './components/Depenses'
+import Calendrier from './components/Calendrier'
 import './App.css'
 
 const auth = getAuth(app)
 
 const PAGES = [
   { id: 'reservations', label: 'Reservations' },
+  { id: 'calendrier', label: 'Calendrier' },
   { id: 'taches', label: 'Taches' },
   { id: 'depenses', label: 'Depenses' },
 ]
@@ -79,6 +81,7 @@ function App() {
       <main className="main">
         <div className="container">
           {page === 'reservations' && <Reservations />}
+          {page === 'calendrier' && <Calendrier />}
           {page === 'taches' && <Taches />}
           {page === 'depenses' && <Depenses />}
         </div>
