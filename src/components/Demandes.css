@@ -1,0 +1,115 @@
+.dem-badge {
+  font-size: 12px;
+  font-weight: 700;
+  background: #c9a96e;
+  color: #ffffff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dem-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dem-card {
+  background: #fdf6ec;
+  border: 1px solid rgba(201,169,110,0.15);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dem-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dem-nom {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2c1810;
+}
+
+.dem-nuits {
+  font-size: 12px;
+  font-weight: 700;
+  color: #c9a96e;
+  background: rgba(201,169,110,0.12);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.dem-info-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dem-info {
+  font-size: 13px;
+  color: #8a7060;
+}
+
+.dem-info strong {
+  color: #2c1810;
+  margin-right: 4px;
+}
+
+.dem-message {
+  font-size: 13px;
+  font-style: italic;
+  color: #8a7060;
+  border-left: 2px solid rgba(201,169,110,0.4);
+  padding-left: 10px;
+}
+
+.dem-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dem-btn-approuver {
+  background: #16a34a;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dem-btn-approuver:hover {
+  background: #15803d;
+}
+
+.dem-btn-refuser {
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid rgba(239,68,68,0.4);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dem-btn-refuser:hover {
+  background: rgba(239,68,68,0.06);
+}
